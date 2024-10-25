@@ -13,7 +13,7 @@ import jobStatusRoutes from "./routes/jobStatusRoutes.js";
 import passwordValidationRoutes from "./routes/passwordValidationRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js"
 import messageRoutes from "./routes/messageRoutes.js"
-
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
@@ -24,6 +24,8 @@ const app = express();
 app.use(sessionMiddleware);
 
 app.use(express.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(
   cors({
@@ -64,14 +66,22 @@ app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
 );
-const path = require('path');
+// const path = require('path');
 
-// Serve static files from the React frontend app
+// // Serve static files from the React frontend app
+// app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+// // Catch-all handler to serve the frontend for any route not handled by the backend
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+// });
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// Catch-all handler to serve the frontend for any route not handled by the backend
+// ... your API routes here ...
+
+// Always serve the React app for any unmatched routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 
