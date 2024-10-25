@@ -63,7 +63,7 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 5001;
 app.listen(
-  PORT,
+  PORT,'0.0.0.0',
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold)
 );
 // const path = require('path');
