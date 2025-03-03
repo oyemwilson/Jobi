@@ -30,6 +30,7 @@ const __dirname = path.dirname(__filename);
 const allowedOrigins = [
   'https://jobx-uu5x.onrender.com',
   'http://localhost:3000', // For local development
+  'https://jobx.netlify.app', // For local development
 ];
 
 app.use(
